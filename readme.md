@@ -285,7 +285,7 @@ An array holding secrets/sensitive-information to be removed from the body and m
 ##### `stream`
 
 - Type: `stream.Writable|stream.Writable[]`
-- Default: `process.stdout`
+- Default: `process.stderr`
 
 Destination to which the data is written, can be a single valid [Writable stream](https://nodejs.org/api/stream.html#stream_writable_streams) or an array holding multiple valid Writable streams.
 
@@ -442,7 +442,7 @@ setTimeout(() => {
 
 ### Writable Streams
 
-By default, all signale instances log their messages to the `process.stdout` stream. This can be modified, to match your own preference, through the [`stream`](#stream) property, where you can define a single or multiple valid Writable streams, which will be used by all logger types to log your data. Additionally, it is possible to define one or more Writable streams exclusively for a specific logger type, thus write data independently from the rest logger types.
+By default, all signale instances log their messages to the `process.stderr` stream. This can be modified, to match your own preference, through the [`stream`](#stream) property, where you can define a single or multiple valid Writable streams, which will be used by all logger types to log your data. Additionally, it is possible to define one or more Writable streams exclusively for a specific logger type, thus write data independently from the rest logger types.
 
 ```js
 const { Signale } = require('signales');

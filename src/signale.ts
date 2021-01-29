@@ -118,12 +118,12 @@ class SignaleImpl<T extends string = DefaultLogTypes, L extends string = Default
 
   get date(): string {
     const _ = new Date()
-    return [_.getFullYear(), _.getMonth() + 1, _.getDate()].join('-')
+    return [_.getFullYear(), _.getMonth() + 1, _.getDate()].map(n => String(n).padStart(2, '0')).join('-')
   }
 
   get timestamp(): string {
     const _ = new Date()
-    return [_.getHours(), _.getMinutes(), _.getSeconds()].join(':')
+    return [_.getHours(), _.getMinutes(), _.getSeconds()].map(n => String(n).padStart(2, '0')).join(':')
   }
 
   get filename(): string {
