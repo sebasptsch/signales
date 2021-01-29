@@ -33,17 +33,19 @@ export type Secrets = (string | number)[]
 
 export type LoggerFunction = (...message: any[]) => void
 
-export type LogLevel = 'info' | 'timer' | 'debug' | 'warn' | 'error'
+export type DefaultLogLevels = 'info' | 'timer' | 'debug' | 'warn' | 'error'
+// alias for backward-compatibility
+export type LogLevel = DefaultLogLevels
 
-export interface LoggerConfiguration {
+export interface LoggerConfiguration<L extends string = DefaultLogLevels> {
   badge: string,
   color: ChalkColor | '',
   label: string,
-  logLevel?: LogLevel,
+  logLevel?: L | DefaultLogLevels,
   stream?: WritableStream | WritableStream[],
 }
 
-export type LoggerTypesConf<T extends string> = Record<T, LoggerConfiguration>
+export type LoggerTypesConf<T extends string, L extends string = DefaultLogLevels> = Record<T, LoggerConfiguration<L>>
 
 export interface InstanceConfiguration {
   displayBadge?: boolean,
@@ -61,15 +63,15 @@ export interface InstanceConfiguration {
 
 export type ScopeFormatter = (scopePath: string[]) => string
 
-export interface ConstructorOptions<T extends string> {
+export interface ConstructorOptions<T extends string, L extends string = DefaultLogLevels> {
   config?: InstanceConfiguration,
   disabled?: boolean,
   interactive?: boolean,
-  logLevel?: LogLevel | string,
-  logLevels?: Record<string, number>,
+  logLevel?: L | DefaultLogLevels,
+  logLevels?: Record<L, number>,
   scope?: string | string[],
   scopeFormatter?: ScopeFormatter,
   secrets?: Secrets,
   stream?: WritableStream | WritableStream[],
-  types?: Partial<LoggerTypesConf<T>>,
+  types?: Partial<LoggerTypesConf<T, L>>,
 }
