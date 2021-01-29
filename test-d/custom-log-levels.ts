@@ -6,6 +6,7 @@ const custom = new Signale({
   logLevels: {
     sherlock: -1,
   },
+  logLevel: 'sherlock',
   types: {
     sherlock: {
       badge: '🔎',
