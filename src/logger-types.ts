@@ -1,6 +1,6 @@
 'use strict';
 import figures from 'figures'
-import type {DefaultLogTypes, LoggerTypesConf} from './types'
+import type { DefaultLogTypes, LoggerTypesConf } from './types'
 
 const logTypes: LoggerTypesConf<DefaultLogTypes> = {
   error: {

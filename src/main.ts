@@ -7,7 +7,7 @@ import type {
   InstanceConfiguration,
   LoggerFunction,
   LoggerTypesConf,
-  ScopeFormatter,
+  ScopeFormatter, DefaultLogLevels,
 } from './types'
 
 export type SignaleEntrypoint = typeof Signale & { Signale: SignaleConstructor}
@@ -26,7 +26,7 @@ export {
 }
 
 // utility type
-export type SignaleConstructorOptions<T extends string = DefaultLogTypes> = ConstructorOptions<T>
+export type SignaleConstructorOptions<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> = ConstructorOptions<T, L>
 
 // re-export types
 export {

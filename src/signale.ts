@@ -14,7 +14,7 @@ import {
   DefaultLogTypes, InstanceConfiguration,
   LoggerConfiguration, LoggerFunction,
   LoggerTypesConf,
-  LogLevel, ScopeFormatter, Secrets
+  DefaultLogLevels, ScopeFormatter, Secrets
 } from './types'
 
 import CallSite = NodeJS.CallSite;
@@ -52,26 +52,26 @@ function barsScopeFormatter(scopes: string[]): string {
   return scopes.map(scope => `[${scope}]`).join(' ')
 }
 
-class SignaleImpl<T extends string = DefaultLogTypes> {
+class SignaleImpl<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> {
   _interactive: boolean
   _config: InstanceConfiguration
-  _customTypes: Partial<LoggerTypesConf<T>>
+  _customTypes: Partial<LoggerTypesConf<T, L>>
   _customLogLevels: Record<string, number>
   _logLevels: Record<string, number>
   _disabled: boolean
   _scopeName: string | string[]
   _timers: Map<string, number>
   _seqTimers: Array<string>
-  _types: LoggerTypesConf<DefaultLogTypes | T>
+  _types: LoggerTypesConf<DefaultLogTypes | T, L>
   _stream: WritableStream | WritableStream[]
   _longestLabel: string
   _secrets: Secrets
   _scopeFormatter: ScopeFormatter
-  _generalLogLevel: string
+  _generalLogLevel: L | DefaultLogLevels
 
   static barsScopeFormatter: ScopeFormatter = barsScopeFormatter
 
-  constructor(options: ConstructorOptions<T> = {}) {
+  constructor(options: ConstructorOptions<T, L> = {}) {
     this._interactive = options.interactive || false
     this._config = Object.assign(this.packageConfiguration, options.config)
     this._customTypes = Object.assign({}, options.types)
@@ -102,7 +102,7 @@ class SignaleImpl<T extends string = DefaultLogTypes> {
     return this._arrayify(this._scopeName).filter(x => x.length !== 0)
   }
 
-  get currentOptions(): Omit<Required<ConstructorOptions<T>>, 'scope'> {
+  get currentOptions(): Omit<Required<ConstructorOptions<T, L>>, 'scope'> {
     return {
       config: this._config,
       disabled: this._disabled,
@@ -169,12 +169,12 @@ class SignaleImpl<T extends string = DefaultLogTypes> {
     return labels.reduce((x, y) => x.length > y.length ? x : y)
   }
 
-  _validateLogLevel(level: LogLevel | string | undefined): string {
+  _validateLogLevel(level: L | DefaultLogLevels | undefined): L | DefaultLogLevels {
     return level && Object.keys(this._logLevels).includes(level) ? level : 'debug'
   }
 
-  _mergeTypes(standard: LoggerTypesConf<DefaultLogTypes>, custom: Partial<LoggerTypesConf<T>>): LoggerTypesConf<T | DefaultLogTypes> {
-    const types: LoggerTypesConf<T | DefaultLogTypes> = Object.assign({}, standard) as LoggerTypesConf<T | DefaultLogTypes>
+  _mergeTypes(standard: LoggerTypesConf<DefaultLogTypes>, custom: Partial<LoggerTypesConf<T, L>>): LoggerTypesConf<T | DefaultLogTypes, L> {
+    const types: LoggerTypesConf<T | DefaultLogTypes, L> = Object.assign({}, standard) as LoggerTypesConf<T | DefaultLogTypes, L>
 
     Object.keys(custom).forEach(type => {
       types[type as T] = Object.assign({}, types[type as T], custom[type as T])
@@ -255,7 +255,7 @@ class SignaleImpl<T extends string = DefaultLogTypes> {
     return (suffix || prefix) ? '' : this._formatMessage(args)
   }
 
-  _buildSignale(type: LoggerConfiguration, ...args: any[]): string {
+  _buildSignale(type: LoggerConfiguration<L>, ...args: any[]): string {
     let msg
     let additional: AdditionalFormatObj = {}
 
@@ -468,9 +468,11 @@ class SignaleImpl<T extends string = DefaultLogTypes> {
   }
 }
 
-export type SignaleType<T extends string = DefaultLogTypes> = Record<T, LoggerFunction> &
-  Record<DefaultLogTypes, LoggerFunction> & SignaleImpl<T> & (new <T extends string = DefaultLogTypes>(options?: ConstructorOptions<T>) => SignaleType<T>)
+export type SignaleType<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> = Record<T, LoggerFunction> &
+  Record<DefaultLogTypes, LoggerFunction> & SignaleImpl<T, L> &
+  (new <T extends string = DefaultLogTypes, L extends string = DefaultLogLevels>(options?: ConstructorOptions<T, L>) => SignaleType<T, L>)
 
-export type SignaleConstructor<T extends string = DefaultLogTypes> = new (options?: ConstructorOptions<T>) => SignaleType<T>
+export type SignaleConstructor<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> =
+  new (options?: ConstructorOptions<T, L>) => SignaleType<T, L>
 
 export default SignaleImpl as unknown as SignaleType
