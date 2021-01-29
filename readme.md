@@ -58,10 +58,6 @@ import { Signale } from 'signales' // same as above
 
 Hackable and configurable to the core, signales can be used for logging purposes, status reporting, as well as for handling the output rendering process of other node modules and applications.
 
-Read this document in: [简体中文](https://github.com/anru/signales/blob/master/docs/readme.zh_CN.md).
-
-Visit the [contributing guidelines](https://github.com/anru/signales/blob/master/contributing.md#translating-documentation) to learn more on how to translate this document into more languages.
-
 Come over [Twitter](https://twitter.com/anrublev) to share your thoughts on the project.
 
 ## Highlights

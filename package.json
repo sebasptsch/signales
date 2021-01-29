@@ -1,6 +1,6 @@
 {
   "name": "signales",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Highly configurable logging utility",
   "license": "MIT",
   "repository": "anru/signales",
