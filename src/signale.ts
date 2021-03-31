@@ -14,6 +14,7 @@ import {
   DefaultLogTypes, InstanceConfiguration,
   LoggerConfiguration, LoggerFunction,
   LoggerTypesConf,
+  DefaultLoggerTypes,
   DefaultLogLevels, ScopeFormatter, Secrets
 } from './types'
 
@@ -52,17 +53,17 @@ function barsScopeFormatter(scopes: string[]): string {
   return scopes.map(scope => `[${scope}]`).join(' ')
 }
 
-class SignaleImpl<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> {
+class SignaleImpl<T extends string = never, L extends string = never> {
   _interactive: boolean
   _config: InstanceConfiguration
-  _customTypes: Partial<LoggerTypesConf<T, L>>
-  _customLogLevels: Record<string, number>
+  _customTypes: LoggerTypesConf<T, L> & Partial<LoggerTypesConf<DefaultLogTypes, L>>
+  _customLogLevels: Partial<Record<DefaultLogLevels, number>> & Record<L, number>
   _logLevels: Record<string, number>
   _disabled: boolean
   _scopeName: string | string[]
   _timers: Map<string, number>
   _seqTimers: Array<string>
-  _types: LoggerTypesConf<DefaultLogTypes | T, L>
+  _types: Record<T, Partial<LoggerConfiguration<L>>> & DefaultLoggerTypes<L>
   _stream: WritableStream | WritableStream[]
   _longestLabel: string
   _secrets: Secrets
@@ -165,7 +166,7 @@ class SignaleImpl<T extends string = DefaultLogTypes, L extends string = Default
 
   _getLongestLabel(): string {
     const {_types} = this
-    const labels = Object.keys(_types).map(x => _types[x as T].label)
+    const labels = Object.keys(_types).map(x => _types[x as T].label || '')
     return labels.reduce((x, y) => x.length > y.length ? x : y)
   }
 
@@ -173,8 +174,8 @@ class SignaleImpl<T extends string = DefaultLogTypes, L extends string = Default
     return level && Object.keys(this._logLevels).includes(level) ? level : 'debug'
   }
 
-  _mergeTypes(standard: LoggerTypesConf<DefaultLogTypes>, custom: Partial<LoggerTypesConf<T, L>>): LoggerTypesConf<T | DefaultLogTypes, L> {
-    const types: LoggerTypesConf<T | DefaultLogTypes, L> = Object.assign({}, standard) as LoggerTypesConf<T | DefaultLogTypes, L>
+  _mergeTypes(standard: DefaultLoggerTypes<L>, custom: LoggerTypesConf<T, L>): Record<T, Partial<LoggerConfiguration<L>>> & DefaultLoggerTypes<L> {
+    const types: Record<T, Partial<LoggerConfiguration<L>>> & DefaultLoggerTypes<L> = Object.assign({}, standard) as Record<T, Partial<LoggerConfiguration<L>>> & DefaultLoggerTypes<L>
 
     Object.keys(custom).forEach(type => {
       types[type as T] = Object.assign({}, types[type as T], custom[type as T])
@@ -255,7 +256,7 @@ class SignaleImpl<T extends string = DefaultLogTypes, L extends string = Default
     return (suffix || prefix) ? '' : this._formatMessage(args)
   }
 
-  _buildSignale(type: LoggerConfiguration<L>, ...args: any[]): string {
+  _buildSignale(type: Partial<LoggerConfiguration<L>>, ...args: any[]): string {
     let msg
     let additional: AdditionalFormatObj = {}
 
@@ -468,11 +469,11 @@ class SignaleImpl<T extends string = DefaultLogTypes, L extends string = Default
   }
 }
 
-export type SignaleType<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> = Record<T, LoggerFunction> &
+export type SignaleType<T extends string = never, L extends string = never> = Record<T, LoggerFunction> &
   Record<DefaultLogTypes, LoggerFunction> & SignaleImpl<T, L> &
-  (new <T extends string = DefaultLogTypes, L extends string = DefaultLogLevels>(options?: ConstructorOptions<T, L>) => SignaleType<T, L>)
+  (new <T extends string = never, L extends string = never>(options?: ConstructorOptions<T, L>) => SignaleType<T, L>)
 
-export type SignaleConstructor<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> =
+export type SignaleConstructor<T extends string = never, L extends string = never> =
   new (options?: ConstructorOptions<T, L>) => SignaleType<T, L>
 
 export default SignaleImpl as unknown as SignaleType

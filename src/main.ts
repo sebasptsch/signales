@@ -10,7 +10,7 @@ import type {
   ScopeFormatter, DefaultLogLevels,
 } from './types'
 
-export type SignaleEntrypoint = typeof Signale & { Signale: SignaleConstructor}
+export type SignaleEntrypoint = typeof Signale & { Signale: SignaleConstructor }
 
 const signale: SignaleEntrypoint = Object.assign(new Signale(), {
   Signale,
@@ -25,8 +25,9 @@ export {
   Signales,
 }
 
-// utility type
-export type SignaleConstructorOptions<T extends string = DefaultLogTypes, L extends string = DefaultLogLevels> = ConstructorOptions<T, L>
+// type for backward compartibility
+// same as ConstructorOptions
+export type SignaleConstructorOptions<T extends string = never, L extends string = never> = ConstructorOptions<T, L>
 
 // re-export types
 export {
@@ -35,7 +36,10 @@ export {
   InstanceConfiguration,
   LoggerFunction,
   LoggerTypesConf,
-  ScopeFormatter
+  ScopeFormatter,
+  DefaultLogTypes,
+  DefaultLogLevels,
+  ConstructorOptions,
 }
 
 export default signale

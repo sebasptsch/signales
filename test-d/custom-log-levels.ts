@@ -8,6 +8,9 @@ const custom = new Signale({
   },
   logLevel: 'sherlock',
   types: {
+    debug: {
+      color: 'grey',
+    },
     sherlock: {
       badge: '🔎',
       color: 'yellow',
