@@ -1,8 +1,8 @@
 'use strict';
 import figures from 'figures'
-import type { DefaultLogTypes, LoggerTypesConf } from './types'
+import type { DefaultLoggerTypes } from './types'
 
-const logTypes: LoggerTypesConf<DefaultLogTypes> = {
+const logTypes: DefaultLoggerTypes = {
   error: {
     badge: figures.cross,
     color: 'red',
