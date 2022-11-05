@@ -1,25 +1,24 @@
-import { Signale } from '..'
+import { Signale } from "..";
 
 const custom = new Signale({
   stream: process.stderr,
-  scope: 'custom',
+  scope: "custom",
   logLevels: {
     sherlock: -1,
   },
-  logLevel: 'sherlock',
+  logLevel: "sherlock",
   types: {
     debug: {
-      color: 'grey',
+      color: "yellow",
     },
     sherlock: {
-      badge: '🔎',
-      color: 'yellow',
-      label: 'sherlock',
-      logLevel: 'sherlock' as const,
+      badge: "🔎",
+      color: "yellow",
+      label: "sherlock",
+      logLevel: "sherlock" as const,
     },
-  }
+  },
 });
 
-custom.sherlock('Elementary! You have an unused variable on L221.');
-custom.debug('This should still work');
-
+custom.sherlock("Elementary! You have an unused variable on L221.");
+custom.debug("This should still work");

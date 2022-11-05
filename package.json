@@ -1,24 +1,30 @@
 {
   "name": "signales",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Highly configurable logging utility",
   "license": "MIT",
-  "repository": "anru/signales",
+  "repository": "sebasptsch/signales",
   "scripts": {
     "test": "tsd",
-    "build": "tsc -p . -d --outDir lib",
-    "prepublish": "npm run build",
-    "clean": "rm -rf lib"
+    "build": "tsup"
   },
   "engines": {
     "node": ">=10"
   },
   "files": [
-    "lib",
-    "src"
+    "dist",
+    "license.md"
   ],
-  "main": "lib/main.js",
-  "types": "./lib/main.d.ts",
+  "main": "./dist/main.js",
+  "module": "./dist/main.mjs",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/main.js",
+      "import": "./dist/main.mjs",
+      "types": "./dist/main.d.ts"
+    }
+  },
   "keywords": [
     "log",
     "cli",
@@ -32,13 +38,15 @@
     "directory": "test-d"
   },
   "dependencies": {
-    "chalk": "4.1.0",
-    "figures": "3.2.0",
-    "pkg-conf": "3.1.0"
+    "callsite": "^1.0.0",
+    "chalk": "^5.1.2",
+    "figures": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "^11.11.3",
+    "@types/node": "^18.11.9",
+    "signale": "^1.4.0",
     "tsd": "^0.14.0",
+    "tsup": "^6.4.0",
     "typescript": "^4.2.3"
   },
   "author": {
@@ -46,11 +54,15 @@
     "email": "klaussinani@gmail.com",
     "url": "https://klaussinani.github.io"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
   "maintainers": [
     {
-      "name": "Andrey Rublev",
-      "email": "box@anru.me",
-      "url": "http://anru.me"
+      "name": "Sebastian Pietschner",
+      "email": "sebastian@sebasptsch.dev",
+      "url": "https://www.sebasptsch.dev"
     }
   ]
 }
