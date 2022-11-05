@@ -112,10 +112,11 @@ class SignaleImpl<T extends string = never, L extends string = never> {
     return this._arrayify(this._scopeName).filter((x) => x.length !== 0);
   }
 
-  get currentOptions(): Omit<Required<ConstructorOptions<T, L>>, "scope"> {
+  get currentOptions(): Required<ConstructorOptions<T, L>> {
     return {
       config: this._config,
       disabled: this._disabled,
+      scope: this._scopeName,
       types: this._customTypes,
       interactive: this._interactive,
       stream: this._stream,
@@ -466,7 +467,7 @@ class SignaleImpl<T extends string = never, L extends string = never> {
     const SignaleConstructor = (this.constructor ||
       SignaleImpl) as unknown as new (options: ConstructorOptions<N>) => R;
     const newInstance = new SignaleConstructor(
-      Object.assign(this.currentOptions, options)
+      Object.assign({}, this.currentOptions, options)
     );
     newInstance._timers = new Map(this._timers.entries());
     newInstance._seqTimers = [...this._seqTimers];
