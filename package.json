@@ -1,9 +1,9 @@
 {
-  "name": "@sebasptsch/signales",
+  "name": "@dynamicabot/signales",
   "version": "2.0.15",
   "description": "Highly configurable logging utility",
   "license": "MIT",
-  "repository": "sebasptsch/signales",
+  "repository": "dynamicabot/signales",
   "scripts": {
     "test": "tsd",
     "build": "tsup"
