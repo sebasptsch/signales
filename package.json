@@ -3,7 +3,6 @@
   "version": "2.0.15",
   "description": "Highly configurable logging utility",
   "license": "MIT",
-  "private": "false",
   "repository": "dynamicabot/signales",
   "scripts": {
     "test": "tsd",
@@ -49,6 +48,10 @@
     "tsd": "^0.14.0",
     "tsup": "^6.4.0",
     "typescript": "^4.2.3"
+  },
+  "packageManager": "yarn@1.22.19",
+  "publishConfig": {
+    "access": "public"
   },
   "author": {
     "name": "Klaus Sinani",
