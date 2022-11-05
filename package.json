@@ -1,6 +1,6 @@
 {
   "name": "@sebasptsch/signales",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "description": "Highly configurable logging utility",
   "license": "MIT",
   "repository": "sebasptsch/signales",
@@ -38,7 +38,6 @@
     "directory": "test-d"
   },
   "dependencies": {
-    "callsite": "^1.0.0",
     "chalk": "^5.1.2",
     "figures": "^5.0.0",
     "strip-ansi": "^7.0.1"
