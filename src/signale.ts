@@ -381,9 +381,17 @@ class SignaleImpl<T extends string = never, L extends string = never> {
     }
 
     if (stream instanceof WritableStream) {
-      stream.write(`${message}\n`);
+      if (isTTY) {
+        stream.write(`${stripAnsi(message)}\n`);
+      } else {
+        stream.write(`${message}\n`);
+      }
     } else {
-      stream.write(`${stripAnsi(message)}\n`);
+      if (isTTY) {
+        stream.write(`${stripAnsi(message)}\n`);
+      } else {
+        stream.write(`${message}\n`);
+      }
     }
 
     isPreviousLogInteractive = this._interactive;
