@@ -3,6 +3,7 @@
   "version": "2.0.15",
   "description": "Highly configurable logging utility",
   "license": "MIT",
+  "private": "false",
   "repository": "dynamicabot/signales",
   "scripts": {
     "test": "tsd",
