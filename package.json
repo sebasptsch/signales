@@ -54,10 +54,6 @@
     "email": "klaussinani@gmail.com",
     "url": "https://klaussinani.github.io"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "public"
-  },
   "maintainers": [
     {
       "name": "Sebastian Pietschner",
