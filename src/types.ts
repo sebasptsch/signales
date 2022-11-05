@@ -38,7 +38,7 @@ export type LogLevel = DefaultLogLevels;
 
 export interface LoggerConfiguration<L extends string = never> {
   badge: string;
-  color: ColorName;
+  color: ColorName | "";
   label: string;
   logLevel?: L | DefaultLogLevels;
   stream?: WritableStream | WritableStream[];
