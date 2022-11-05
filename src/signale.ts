@@ -19,6 +19,8 @@ import {
   ScopeFormatter,
   Secrets,
 } from "./types";
+import stripAnsi from "strip-ansi";
+import { defaultOptions } from "./options";
 
 type CallSite = NodeJS.CallSite;
 type WriteStream = NodeJS.WriteStream;
@@ -160,7 +162,7 @@ class SignaleImpl<T extends string = never, L extends string = never> {
   }
 
   set configuration(configObj: InstanceConfiguration) {
-    this._config = Object.assign({}, configObj);
+    this._config = Object.assign({}, defaultOptions, configObj);
   }
 
   private _arrayify<T>(x: T): T extends any[] ? T : T[] {
@@ -381,7 +383,7 @@ class SignaleImpl<T extends string = never, L extends string = never> {
     if (stream instanceof WritableStream) {
       stream.write(`${message}\n`);
     } else {
-      stream.write(`${message}\n`);
+      stream.write(`${stripAnsi(message)}\n`);
     }
 
     isPreviousLogInteractive = this._interactive;
