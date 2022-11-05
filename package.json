@@ -1,6 +1,6 @@
 {
-  "name": "signales",
-  "version": "2.0.6",
+  "name": "@sebasptsch/signales",
+  "version": "2.0.7",
   "description": "Highly configurable logging utility",
   "license": "MIT",
   "repository": "sebasptsch/signales",
