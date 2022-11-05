@@ -381,13 +381,13 @@ class SignaleImpl<T extends string = never, L extends string = never> {
     }
 
     if (stream instanceof WritableStream) {
-      if (isTTY) {
+      if (!isTTY) {
         stream.write(`${stripAnsi(message)}\n`);
       } else {
         stream.write(`${message}\n`);
       }
     } else {
-      if (isTTY) {
+      if (!isTTY) {
         stream.write(`${stripAnsi(message)}\n`);
       } else {
         stream.write(`${message}\n`);
