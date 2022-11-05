@@ -13,8 +13,10 @@ jobs:
         with:
           always-auth: true
           cache: "yarn"
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
 
-      - run: yarn
+      - run: yarn install --frozen-lockfile
       - run: yarn build
 
       # Publish NPM
@@ -27,6 +29,7 @@ jobs:
         with:
           registry-url: "https://npm.pkg.github.com"
           always-auth: true
+          node-version: "16.x"
 
       - run: yarn publish
         env:
