@@ -463,8 +463,9 @@ class SignaleImpl<T extends string = never, L extends string = never> {
   clone<N extends string = T, R extends SignaleType<N> = SignaleType<N>>(
     options: ConstructorOptions<N>
   ): R {
-    const SignaleConstructor = (this.constructor ||
-      SignaleImpl) as unknown as new (options: ConstructorOptions<N>) => R;
+    const SignaleConstructor = SignaleImpl as unknown as new (
+      options: ConstructorOptions<N>
+    ) => R;
     const newInstance = new SignaleConstructor(
       Object.assign({}, this.currentOptions, options)
     );
