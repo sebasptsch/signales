@@ -112,11 +112,10 @@ class SignaleImpl<T extends string = never, L extends string = never> {
     return this._arrayify(this._scopeName).filter((x) => x.length !== 0);
   }
 
-  get currentOptions(): Required<ConstructorOptions<T, L>> {
+  get currentOptions(): Omit<Required<ConstructorOptions<T, L>>, "scope"> {
     return {
       config: this._config,
       disabled: this._disabled,
-      scope: this._scopeName,
       types: this._customTypes,
       interactive: this._interactive,
       stream: this._stream,
