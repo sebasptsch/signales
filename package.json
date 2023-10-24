@@ -43,7 +43,7 @@
     "strip-ansi": "^7.0.1"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
+    "@types/node": "^20.0.0",
     "signale": "^1.4.0",
     "tsd": "^0.14.0",
     "tsup": "^6.4.0",
