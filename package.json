@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "chalk": "^5.1.2",
-    "figures": "^5.0.0",
+    "figures": "^6.0.0",
     "strip-ansi": "^7.0.1"
   },
   "devDependencies": {
