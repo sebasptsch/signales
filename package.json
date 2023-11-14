@@ -1,6 +1,6 @@
 {
   "name": "@dynamicabot/signales",
-  "version": "2.0.15",
+  "version": "2.1.0",
   "description": "Highly configurable logging utility",
   "license": "MIT",
   "repository": "dynamicabot/signales",
