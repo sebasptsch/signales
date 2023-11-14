@@ -1,7 +1,6 @@
 name: Publish Package to npmjs
 on:
-  release:
-    types: [created]
+  workflow_call: 
 jobs:
   build:
     permissions:
@@ -13,24 +12,13 @@ jobs:
         with:
           always-auth: true
           cache: "yarn"
-          node-version: "16.x"
+          node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
 
       - run: yarn install --frozen-lockfile
       - run: yarn build
 
       # Publish NPM
-      - run: yarn publish
+      - run: yarn semantic-release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
-
-      # Publish GHPR
-      - uses: actions/setup-node@v4
-        with:
-          registry-url: "https://npm.pkg.github.com"
-          always-auth: true
-          node-version: "16.x"
-
-      - run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
