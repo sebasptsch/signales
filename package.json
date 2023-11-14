@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "signale": "^1.4.0",
-    "tsd": "^0.14.0",
+    "tsd": "^0.29.0",
     "tsup": "^7.0.0",
     "typescript": "^5.0.0"
   },
