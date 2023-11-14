@@ -14,15 +14,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           always-auth: true
-          cache: "yarn"
+          cache: "pnpm"
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
 
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
 
       # Publish NPM
-      - run: yarn semantic-release
+      - run: pnpm semantic-release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
