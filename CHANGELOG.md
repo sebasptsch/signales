@@ -1,3 +1,11 @@
+## [2.1.1](https://github.com/dynamicabot/signales/compare/2.1.0...2.1.1) (2023-11-14)
+
+
+### Bug Fixes
+
+* **ci:** Add testing ([f9347d7](https://github.com/dynamicabot/signales/commit/f9347d71623836cb364fa506d701353f89a93b1e))
+* **deps:** Remove signales dependancy ([b995b6f](https://github.com/dynamicabot/signales/commit/b995b6fa393dfa39266a0c892823a238429d34fb))
+
 # [2.1.0](https://github.com/dynamicabot/signales/compare/2.0.15...2.1.0) (2023-11-14)
 
 
