@@ -28,9 +28,6 @@ devDependencies:
   semantic-release:
     specifier: ^22.0.7
     version: 22.0.7(typescript@5.2.2)
-  signale:
-    specifier: ^1.4.0
-    version: 1.4.0
   tsd:
     specifier: ^0.29.0
     version: 0.29.0
