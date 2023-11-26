@@ -52,7 +52,7 @@
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
   },
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@1.22.21",
   "publishConfig": {
     "access": "public"
   },
