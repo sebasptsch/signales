@@ -7,7 +7,7 @@
   "scripts": {
     "test": "tsd",
     "build": "tsup",
-    "release": "semantic-release"
+    "release": "pnpm publish && pnpm changeset tag"
   },
   "engines": {
     "node": ">=10"
@@ -44,6 +44,7 @@
     "strip-ansi": "^7.0.1"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.0.0",
@@ -52,7 +53,7 @@
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
   },
-  "packageManager": "yarn@1.22.21",
+  "packageManager": "pnpm@9.2.0",
   "publishConfig": {
     "access": "public"
   },
@@ -67,20 +68,5 @@
       "email": "sebastian@sebasptsch.dev",
       "url": "https://www.sebasptsch.dev"
     }
-  ],
-  "release": {
-    "branches": [
-      "master"
-    ],
-    "repositoryUrl": "https://github.com/dynamicabot/signales",
-    "tagFormat": "${version}",
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      "@semantic-release/git"
-    ]
-  }
+  ]
 }

@@ -90,13 +90,13 @@ Come over [Twitter](https://twitter.com/anrublev) to share your thoughts on the 
 ### Yarn
 
 ```bash
-yarn add signales
+yarn add @dynamicabot/signales
 ```
 
 ### NPM
 
 ```bash
-npm install signales
+npm install @dynamicabot/signales
 ```
 
 ## Usage
