@@ -50,7 +50,7 @@
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
   },
-  "packageManager": "pnpm@9.2.0",
+  "packageManager": "pnpm@9.9.0",
   "publishConfig": {
     "access": "public"
   },
