@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@changesets/cli':
-        specifier: ^2.27.7
-        version: 2.27.7
       chalk:
         specifier: ^5.1.2
         version: 5.3.0
@@ -21,6 +18,9 @@ importers:
         specifier: ^7.0.1
         version: 7.1.0
     devDependencies:
+      '@changesets/cli':
+        specifier: ^2.27.7
+        version: 2.27.7
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@22.0.12(typescript@5.5.4))
